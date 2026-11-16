@@ -20,6 +20,7 @@ This is a field that in particular benefit games with larger levels and worlds, 
 I also hope this thesis will be of use to anyone hoping to take their first steps toward level and asset streaming optimization.
 <br><br><br><br>
 
+
 <h2>How do I achieve seamless streaming similar to Alan Wake II?</h2>
 <br><br>
 
@@ -28,7 +29,19 @@ The first week of research did reveal that while Alan Wake II definitely uses so
 <br><br><br><br>
 
 
+<h2>Research</h2>
+<br><br>
 
+I started the research by looking for resources specifically on how Remedy handles level streaming, but as mentioned above this was a bit of a wild goose chase. Nazareno Urbano's (Remedy Entertainment) talk ["The Dark Place of 'Alan Wake 2': Crafting an Evolving Nightmare Dimension](https://www.youtube.com/watch?v=vyafiQG6XEU) was the video that made me realize the seamless transitions I experienced in the game was not what I technically aim to research, level and asset streaming.
+<br>
+I then fell down a design rabbit hole of how developers use level design to better hide the streaming of levels, famously the blast doors of Metroid only opening after the room is loaded and the "squeeze-through-a-tight-gap" technique that was and is still used to intentionally slow down the player so the level or assets can load. This is interesting, and I might look into implementing something like this for my project if there's time, but again is not what my research is about.
+<br>
+<br>
+At this point I decided to start searching for Unity-specific resources on streaming since general resources seemed nigh-on impossible to find, at least as far as programming goes. The absolute majority of results from this new search topic came in the form of Unity's Addressables/AssetBundles system. My initial testing will compare basic, asynchronous and addressable (additive) streaming of scenes. Addressables in particular seems promising both for scenes and asset streaming, but as described in [Asset Streaming in Valheim](https://www.youtube.com/watch?v=Fzu2Das_1FU), a talk by a third-party consulting developer for Iron Gate which implemented asset streaming to Valheim post-launch.
+<br>
+A lot of the sources I came across also tended to discuss other, more general rendering optimization which goes hand-in-hand with optimizing streaming. Batching draw calls, impostors, LODs, etc. I will be looking into batching draw calls for sure, as I'm curious how it interacts with the AssetBundle and Addressables system.
+<br>
+
+<br><br><br><br>
 TO DO/Skeleton text:<br>
-- TEXT.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;  - TEXT.<br>
+- Add links to addressables tutorial and batching draw calls tutorial.
