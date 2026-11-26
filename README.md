@@ -6,14 +6,14 @@
 <br><br><br><br><br><br><br><br><br>
 
 <h2>Introduktion</h2>
-<br><br>
+<br>
 
 I'm Billy, and this is my thesis project as student at YRGO's "Game Creator - Programmer" program in Gothenburg.<br>
 I have a background in game design, and have dabbled in many game engines, DAWs, 3D modeling programs, bug tracking software and other tools but my primary experience with completed projects lie in Unity.<br>
 That game design background is also where I've encountered the topic I've chosen to tackle for this thesis; seamless level streaming. Even before that I was also interested in how developers achieved (and tried to achieve) this in games.<br>
 Like many other optimization fields it's a thankless task: When it's not perfect it can be very noticeable by players, but when it's working flawlessly it should ideally not be something they think about at all.<br>
 
-<br><br>
+<br>
 The goal I want to work towards and hope to achieve with this project is then seamlessly streaming in subscenes into a main scene.<br>
 Whether I manage to achieve that goal or not I expect to learn a lot about optimization, mostly within the context of Unity but also methods that are more engine agnostic. 
 This is a field that in particular benefit games with larger levels and worlds, the types of games which I subsequently hope to be able to confer smart, studied development insights for.<br>
@@ -22,7 +22,7 @@ I also hope this thesis will be of use to anyone hoping to take their first step
 
 
 <h2>How do I achieve seamless streaming similar to Alan Wake II?</h2>
-<br><br>
+<br>
 
 Through this project I want to research and understand how level and asset streaming affect frame times, and how that effect can be minimized or even completely avoided. I specifically chose Alan Wake II as reference game due to having it fresh in memory the times in that game where the player enter a room through a door, only to seconds later exit through the same door and ending up somewhere different than where they came from. My assumption was that this was a very smooth level streaming happening as the player entered the second room.<br>
 The first week of research did reveal that while Alan Wake II definitely uses some fancy level streaming, the particular moments I was impressed by was more a case of seamlessly transport the player WITHIN a level. While this is a really interesting and effectful technique, it's not quite where my interest lies. I chose to retain Alan Wake II as the aspirational target because while the method used isn't what I will be focusing on, the results are still what I hope to achieve from the player perspective.
@@ -30,7 +30,7 @@ The first week of research did reveal that while Alan Wake II definitely uses so
 
 
 <h2>Research</h2>
-<br><br>
+<br>
 
 I started the research by looking for resources specifically on how Remedy handles level streaming, but as mentioned above this was a bit of a wild goose chase. Nazareno Urbano's (Remedy Entertainment) talk ["The Dark Place of 'Alan Wake 2': Crafting an Evolving Nightmare Dimension](https://www.youtube.com/watch?v=vyafiQG6XEU) was the video that made me realize the seamless transitions I experienced in the game was not what I technically aim to research, level and asset streaming.
 <br>
@@ -43,7 +43,7 @@ A lot of the sources I came across also tended to discuss other, more general re
 <br><br><br><br>
 
 <h2>Knowledge Sharing</h2>
-<br><br>
+<br>
 
 Unity project as (testing) context.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; - Why?<br>
@@ -68,7 +68,7 @@ Data capturing.<br>
 <br><br><br><br>
 
 <h2>Results</h2>
-<br><br>
+<br>
 
 Why loading TIMES cannot be properly compared. (At least not basic loading).<br>
 &nbsp;&nbsp;&nbsp;&nbsp; - Before that though, give it one last try with assistance.<br>
@@ -93,7 +93,7 @@ Take-aways for addressable gameobjects, again in terms of frame time spikes.<br>
 <br><br><br><br>
 
 <h2>Reflections</h2>
-<br><br>
+<br>
 
 Best of the best<br>
 Tangentials<br>
