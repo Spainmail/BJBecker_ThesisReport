@@ -40,7 +40,63 @@ I then fell down a design rabbit hole of how developers use level design to bett
 At this point I decided to start searching for Unity-specific resources on streaming since general resources seemed nigh-on impossible to find, at least as far as programming goes. The absolute majority of results from this new search topic came in the form of Unity's Addressables/AssetBundles system. My initial testing will compare basic, asynchronous and addressable (additive) streaming of scenes. Addressables in particular seems promising both for scenes and asset streaming, but as described in [Asset Streaming in Valheim](https://www.youtube.com/watch?v=Fzu2Das_1FU), a talk by a third-party consulting developer for Iron Gate which implemented asset streaming to Valheim post-launch.
 <br>
 A lot of the sources I came across also tended to discuss other, more general rendering optimization which goes hand-in-hand with optimizing streaming. Batching draw calls, impostors, LODs, etc. I will be looking into batching draw calls for sure, as I'm curious how it interacts with the AssetBundle and Addressables system.
+<br><br><br><br>
+
+<h2>Knowledge Sharing</h2>
+<br><br>
+
+Unity project as (testing) context.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; - Why?<br>
+Scene, player and UI (both settings and data collection) structure.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; - MEDIA: Scene overview with annotations.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; - MEDIA: Overview of level with things loading gif.<br>
+Planned methods of streaming a scene (basic, async, addressable, addressable prefab).<br>
+&nbsp;&nbsp;&nbsp;&nbsp; - Mention scene update with tripled amount of trees.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; - Name the functions.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; - MEDIA: Trees vs. rocks scene.<br>
+Planned methods of streaming an asset/prefab.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; - MEDIA: "Inner" scene overview plus sketch.<br>
+Difficulties implementing and gauging effect of addressables.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; - MEDIA: Code snippet? AS A PNG?<br>
+Difficulties even getting addressables to work for prefabs.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; - MEDIA: Code snippet for non-working state? AS A PNG?<br>
+Batching draw calls.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; - Should this one just have its results presented here since it's tangential to my actual research? Ask Mikael?<br>
+&nbsp;&nbsp;&nbsp;&nbsp; - MEDIA: FPS comparison gif?<br>
+Data capturing.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; - MEDIA: Example shot of load time log and frame time UI elements (with annotations).<br>
+<br><br><br><br>
+
+<h2>Results</h2>
+<br><br>
+
+Why loading TIMES cannot be properly compared. (At least not basic loading).<br>
+&nbsp;&nbsp;&nbsp;&nbsp; - Before that though, give it one last try with assistance.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; - Basic loading (Scenemanagement.LoadScene()) seems to consider the scene completely loaded once it itself is instantiated and present in the scene rather than when it AND all in its heirarchy is loaded (double check).<br>
+&nbsp;&nbsp;&nbsp;&nbsp; - MEDIA: Show load times being exactly the same every instance for basic loading.<br>
+Frametime data comparisons sectioned by load type and area (north, south, south_rocks).<br>
+&nbsp;&nbsp;&nbsp;&nbsp; - MEDIA: Frame time PNGs vertically stacked, and cut/trimmed to line up in terms of when a load occurs.<br>
+Analyzing above frametime data (including initial hickups when starting and when FIRST loading a scene).<br>
+&nbsp;&nbsp;&nbsp;&nbsp; - Table describing gains, losses?<br>
 <br>
+Basic (Scenemanagement.LoadScene())	Async (Scenemanagement.LoadSceneAsync())	Addressables (Addressables.LoadSceneAsync())	Addressables Prefab/GameObject (Addressables.LoadAssetAsync())
+Frame Time Comparison	High (lowers with subsequent loads?).	Medium (lowers with subsequent loads?).	Low	???
+Positives	Simplest to implement.	Lower frame time spikes than basic loading.
+Almost as simple to implement as basic scene streaming.		
+Negatives	Largest frame time spikes?		Puzzling together addressables groups and structuring scenes around them.	Puzzling together addressables groups and structuring scenes around them.
+<br><br>
+(FPS comparisons before and after batching draw calls / static batching (remember to mention amount of GOs in scene/visible).) - Maybe not relevant enough to make it into this section?<br>
+&nbsp;&nbsp;&nbsp;&nbsp; - MEDIA: If it is though, but that FPS comparison gif here.<br>
+Take-aways in terms of frame time spikes, rather than actual time it takes to load a scene.<br>
+M&nbsp;&nbsp;&nbsp;&nbsp; - EDIA: PNG of the best frame time graph I had over the course of the project. - Hopefully from the final week of recording!<br>
+Take-aways for addressable gameobjects, again in terms of frame time spikes.<br>
+<br><br><br><br>
+
+<h2>Reflections</h2>
+<br><br>
+
+Best of the best<br>
+Tangentials<br>
 
 <br><br><br><br>
 TO DO/Skeleton text:<br>
