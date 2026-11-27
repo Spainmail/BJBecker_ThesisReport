@@ -3,11 +3,10 @@
 <br>
 <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Thesis Project by Billy Becker</i></b><br>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yrgo 2026</p>
-<br><br><br><br>
-
-<img width="1920" height="1040" alt="AssetStreaming" src="https://github.com/user-attachments/assets/11c6998f-2091-4c7d-9a85-efba374701fc" />
-  
-<br><br><br><br><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img width="613" height="460" alt="AssetStreaming-crop" src="https://github.com/user-attachments/assets/a265ee91-dbe8-4da1-b049-82fbd963d952" />
+<br><br><br>
 
 <h2>Introduktion</h2>
 <br>
@@ -28,7 +27,8 @@ I also hope this thesis will be of use to anyone hoping to take their first step
 <h2>How do I achieve seamless streaming similar to Alan Wake II?</h2>
 <br>
 
-Through this project I want to research and understand how level and asset streaming affect frame times, and how that effect can be minimized or even completely avoided. I specifically chose Alan Wake II as reference game due to having it fresh in memory the times in that game where the player enter a room through a door, only to seconds later exit through the same door and ending up somewhere different than where they came from. My assumption was that this was a very smooth level streaming happening as the player entered the second room.<br>
+Through this project I want to research and understand how level and asset streaming affect frame times, and how that effect can be minimized or even completely avoided.<br>
+I specifically chose Alan Wake II as reference game due to having it fresh in memory the times in that game where the player enter a room through a door, only to seconds later exit through the same door and ending up somewhere different than where they came from. My assumption was that this was a very smooth level streaming happening as the player entered the second room.<br>
 The first week of research did reveal that while Alan Wake II definitely uses some fancy level streaming, the particular moments I was impressed by was more a case of seamlessly transport the player WITHIN a level. While this is a really interesting and effectful technique, it's not quite where my interest lies. I chose to retain Alan Wake II as the aspirational target because while the method used isn't what I will be focusing on, the results are still what I hope to achieve from the player perspective.
 <br><br><br><br>
 
@@ -49,11 +49,19 @@ A lot of the sources I came across also tended to discuss other, more general re
 <h2>Knowledge Sharing</h2>
 <br>
 
-Unity project as (testing) context.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; - Why?<br>
-Scene, player and UI (both settings and data collection) structure.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; - MEDIA: Scene overview with annotations.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; - MEDIA: Overview of level with things loading gif.<br>
+The chosen context for my tests is Unity. Both because it's an environment I'm familiar with and because that's where I've previously encountered this topic.<br>
+The product of my thesis project is intended to be a scene which streams in other ones additively, with UI elements to control which streaming techniques is being used. Data should then be possible to collect and record, both for loading times and most importantly for frame time data which is how effectiveness of each streaming method will be measured.<br>
+The player character will be possible to control manually, but also possible to set to automatic movement to some degree.<br>
+It will also contain a section for asset streaming, which is a secondary objective but one that should integrate well with Unity's Addressables system which I'll be implementing for scenes.<br>
+<br>
+<img width="843" height="527" alt="sceneOverview0" src="https://github.com/user-attachments/assets/ecbf769f-385a-4b6c-a038-450339c048da" />
+<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp; - The north scene is a balanced terrain scene.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; - The south scene contains approximately 28.000 rock prefabs of the same kind.<br>
+&nbsp;&nbsp;&nbsp;&nbsp; - The inner scene is for testing GameObject streaming speficically.<br>
+
+
+
 Planned methods of streaming a scene (basic, async, addressable, addressable prefab).<br>
 &nbsp;&nbsp;&nbsp;&nbsp; - Mention scene update with tripled amount of trees.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; - Name the functions.<br>
