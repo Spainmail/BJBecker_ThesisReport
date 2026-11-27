@@ -59,12 +59,17 @@ It will also contain a section for asset streaming, which is a secondary objecti
 &nbsp;&nbsp;&nbsp;&nbsp; - The north scene is a balanced terrain scene.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; - The south scene contains approximately 28.000 rock prefabs of the same kind.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; - The inner scene is for testing GameObject streaming speficically.<br>
+<br><br>
+
+These are the four (additive) scene loading methods I've decided to implement and compare based on my research:
+| Basic | Asynchronous | Addressables (Scenes) | Addressables (GameObjects) |
+|----------|-----------------|--------------------------|-------------------------------|
+| (SceneManagement.LoadScene() | SceneManagement.LoadSceneAsync() | Addressables.LoadSceneAsync() | Addressables.LoadAssetAsync() |
+| The basic way to load scenes in Unity.<br> No frills, just load a scene alongside those already loaded. | Loads a scene while minimizing blockage of other CPU tasks Unity wants to perform. | Loads a scene asynchronously according to user-set groupings of required components. | Loads asset(s) (GameObject, etc.) asynchronously according to user-set groupings of required components. |
 
 
-
-Planned methods of streaming a scene (basic, async, addressable, addressable prefab).<br>
+<br><br>
 &nbsp;&nbsp;&nbsp;&nbsp; - Mention scene update with tripled amount of trees.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; - Name the functions.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; - MEDIA: Trees vs. rocks scene.<br>
 Planned methods of streaming an asset/prefab.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; - MEDIA: "Inner" scene overview plus sketch.<br>
