@@ -66,13 +66,29 @@ These are the four (additive) scene loading methods I've decided to implement an
 |----------|-----------------|--------------------------|-------------------------------|
 | (SceneManagement.LoadScene() | SceneManagement.LoadSceneAsync() | Addressables.LoadSceneAsync() | Addressables.LoadAssetAsync() |
 | The basic way to load scenes in Unity.<br> No frills, just load a scene alongside those already loaded. | Loads a scene while minimizing blockage of other CPU tasks Unity wants to perform. | Loads a scene asynchronously according to user-set groupings of required components. | Loads asset(s) (GameObject, etc.) asynchronously according to user-set groupings of required components. |
+<br><br>
+
+The southern scene was purposefully filled with a large amount of items to better test load time differences, though this ultimately proved to have other drawbacks (the main one being the frame time graph clogging up due to poor overall performance, making it harder to parse). For this reason I made another version of the scene where each tree was replaced by a specific rock asset. This made it still take longer to load than the northern scene, which keeping frame times more stable once it does load.<br>
+<br>
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="435" height="243" alt="fieldofTrees0" src="https://github.com/user-attachments/assets/6dd011a1-6cc5-4801-9000-b0991bf62d8e" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="433" height="243" alt="fieldOfRocks0" src="https://github.com/user-attachments/assets/a7e2f12b-fc95-43b6-a5a0-38841ad3f9a0" />
+<br><br>
+
+When it comes to asset streaming, I wanted to compare two methods: Normal instantiation of prefabs versus Addressables asynchronous loading of the same prefabs.<br>
+The implementation of this went hand-in-hand with streaming scenes as GameObjects, and as I'll go into more in a later section had a much greater impact for assets even if the implementation was the same.<br>
+<br>
+I set up an interior space where no extra terrain would need to be rendered, sectioned into 5 distinct zones containing prefabs. These zones were then made into prefabs, and grouped into Addressables groups according to contained assets. The idea was to see the reduction in load times both comparing those load methods, but also whether multiples of already loaded prefabs would allow for faster streaming within this interior scene.<br>
+<br>
+
+<img width="1087" height="607" alt="BillyBeckerThesisProj - Main - Windows, Mac, Linux - Unity 6 6 (6000 6 4f1) _DX12_ 2026-11-26 21_08_01" src="https://github.com/user-attachments/assets/0d243149-3c27-4c26-b45f-5081281a47f7" />
+<img width="1153" height="593" alt="AssetStreaming_Layout" src="https://github.com/user-attachments/assets/b18c53cb-bd23-4e19-b196-3c5f328db8cd" />
 
 
 <br><br>
-&nbsp;&nbsp;&nbsp;&nbsp; - Mention scene update with tripled amount of trees.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; - MEDIA: Trees vs. rocks scene.<br>
-Planned methods of streaming an asset/prefab.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; - MEDIA: "Inner" scene overview plus sketch.<br>
 Difficulties implementing and gauging effect of addressables.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; - MEDIA: Code snippet? AS A PNG?<br>
 Difficulties even getting addressables to work for prefabs.<br>
