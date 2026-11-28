@@ -84,25 +84,54 @@ The implementation of this went hand-in-hand with streaming scenes as GameObject
 I set up an interior space where no extra terrain would need to be rendered, sectioned into 5 distinct zones containing prefabs. These zones were then made into prefabs, and grouped into Addressables groups according to contained assets. The idea was to see the reduction in load times both comparing those load methods, but also whether multiples of already loaded prefabs would allow for faster streaming within this interior scene.<br>
 <br>
 
-<img width="1087" height="607" alt="BillyBeckerThesisProj - Main - Windows, Mac, Linux - Unity 6 6 (6000 6 4f1) _DX12_ 2026-11-26 21_08_01" src="https://github.com/user-attachments/assets/0d243149-3c27-4c26-b45f-5081281a47f7" />
-<img width="1153" height="593" alt="AssetStreaming_Layout" src="https://github.com/user-attachments/assets/b18c53cb-bd23-4e19-b196-3c5f328db8cd" />
-
-
+<img width="425" height="318" alt="sketch" src="https://github.com/user-attachments/assets/c23eb53b-cf61-4c21-be7a-68445d947699" />
+&nbsp;&nbsp;&nbsp;&nbsp;
+<img width="543" height="303" alt="BillyBeckerThesisProj - Main - Windows, Mac, Linux - Unity 6 6 (6000 6 4f1) _DX12_ 2026-11-26 21_08_01" src="https://github.com/user-attachments/assets/0d243149-3c27-4c26-b45f-5081281a47f7" />
 <br><br>
-Difficulties implementing and gauging effect of addressables.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; - MEDIA: Code snippet? AS A PNG?<br>
-Difficulties even getting addressables to work for prefabs.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; - MEDIA: Code snippet for non-working state? AS A PNG?<br>
-Batching draw calls.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; - Should this one just have its results presented here since it's tangential to my actual research? Ask Mikael?<br>
-&nbsp;&nbsp;&nbsp;&nbsp; - MEDIA: FPS comparison gif?<br>
-Data capturing.<br>
-&nbsp;&nbsp;&nbsp;&nbsp; - MEDIA: Example shot of load time log and frame time UI elements (with annotations).<br>
+
+I encountered quite a few difficulties while implementing Addressables specifically. Firstly, while it was easy enough to create basic Addressable Groups and load those at runtime, properly releasing them from memory was a somewhat obtuse process. This was due to how Unity treats AsyncOperationHandles, variables used to keep track of each asynchronous operation to see their status as well as reference back to them on unload.<br>
+Secondly, grouping assets together in a way that makes sense is a puzzle in itself; Which asset prefabs do a specific scene need? Which materials, meshes and shaders to those in turn need? I'll go into this further in the reflections section, but Addressables require a lot of attention.<br>
+The fourth and final method of streaming I implemented for scenes was based on converting them to prefabs and loading those in. Easy enough to implement after already doing the same for individual GameObjects, but harder to optimize than any of the prior three.<br>
+<br>
+During the course of the project I came across various tangential optimization techniques that work hand in hand to ease rendering memory use. One of these is "batching draw calls": meshes which share materials can (at runtime) be combined into needing fewer draw calls per frame. This is extremely easy to just toggle on for applicable GameObjects in Unity, as it's just two clicks per prefab. All that's needed is knowledge of the assets themselves so you know whether they're compatible or not. There's also GPU instancing, a shader option which will batch draw calls even further for objects that share both the same mesh AND material.<br> 
+For the "Rocks" version of the southern scene in my project, this made a huge difference on frame times after loading the scene! So while not technically a level streaming technique, this will reduce CPU bottlenecks which in turn will help with other CPU tasks (including level streaming).<br>
+<br><br>
+<img width="1071" height="719" alt="PerformanceLog_20261123_1304 (Async (Rocks)) txt - Notepad 2026-11-26 21_10_10" src="https://github.com/user-attachments/assets/b6e0f6ad-8be5-46d8-884b-50498bfa76c1" />
+<br><br>
+An important aspect of the Unity project was logging data in order to compare and analyze it. I had two aspects I wanted to record: Load times and, more importantly, frame times. The frame times will help me determine severity of frame time spikes, the main focus of my thesis question.<br>
+To record this data, I implemented a log which displays every load time and a graph which shows frame-for-frame how long each take to render. One a button press these can be exported both as a text file and a PNG which displays all time frame data of the session, also calculating and outputting various important data points for that session (average FPS, max MS/frame, etc.). In hindsight they would have been more accurate and easier to read if I excluded the initial startup frame times as they tended to be an unavoidable spike in themselves.<br>
 <br><br><br><br>
 
 <h2>Results</h2>
 <br>
 
+This is are the latest recorded data sets for each loading type, using the "Rocks" version of the southern scene to make the graphs more readable.<br>
+<br>
+Basic loading:
+<img width="1200" height="600" alt="PerformanceLog_20261123_1303 (Basic (Rocks))_Annotated" src="https://github.com/user-attachments/assets/f7441c28-f510-43cd-a088-42ff4d2553b9" />
+<br>
+Asynchronous loading:
+<img width="1200" height="600" alt="PerformanceLog_20261123_1304 (Async (Rocks))_Annotated" src="https://github.com/user-attachments/assets/60b32288-8f5f-4a92-9225-1f27fb80aa6b" />
+<br>
+Addressables loading using scenes:
+<img width="1200" height="600" alt="PerformanceLog_20261123_1305 (Addressable Scenes (Rocks))_Annotated" src="https://github.com/user-attachments/assets/78c0cab0-51cb-4739-aae7-5d070346463a" />
+<br>
+Addressables loading using prefabs as scenes:
+<img width="1200" height="600" alt="PerformanceLog_20261123_1351 (Addressables (Prefab (Rocks)))_Annotated" src="https://github.com/user-attachments/assets/eb47e2da-fb14-477a-a257-3245b21399ba" />
+<br>
+
+<br><br>
+Scene loading breakdown:<br>
+||<b>Basic</b>|<b>Async</b>|<b>Addressables<br>(Scenes)</b>|<b>Addressables<br>(Prefabs)</b>|
+|<b>Highest load time</b>|
+|<b>Lowest load time</b>|
+|<b>Average FPS</b>|
+|<b>Average MS/Frame</b>|
+|<b>Highest MS/Frame</b>|
+|<b>Lowest MS/Frame</b>|
+
+
+<br><br>
 Why loading TIMES cannot be properly compared. (At least not basic loading).<br>
 &nbsp;&nbsp;&nbsp;&nbsp; - Before that though, give it one last try with assistance.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; - Basic loading (Scenemanagement.LoadScene()) seems to consider the scene completely loaded once it itself is instantiated and present in the scene rather than when it AND all in its heirarchy is loaded (double check).<br>
